@@ -6,7 +6,7 @@ import HomePage from "../pages";
 import About from "../pages/about";
 import Form from "../pages/form";
 import User from "../pages/user";
-import Settings from "../pages/settings";
+import Info from "../pages/info";
 
 const MyApp = () => {
   return (
@@ -19,7 +19,7 @@ const MyApp = () => {
               <Route path="/about" element={<About></About>}></Route>
               <Route path="/form" element={<Form></Form>}></Route>
               <Route path="/user" element={<User></User>}></Route>
-              <Route path="/settings" element={<Settings></Settings>}></Route>
+              <Route path="/info" element={<Info></Info>}></Route>
             </AnimationRoutes>
           </ZMPRouter>
         </SnackbarProvider>
