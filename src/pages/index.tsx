@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { List, Page, Icon, useNavigate, Button } from "zmp-ui";
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { hostState, itemState, userState } from "../state";
 import info from "/icons/icon_info.png";
 
 import { Html5QrcodeScanner } from "html5-qrcode";
@@ -10,21 +10,11 @@ import { Html5Qrcode } from "html5-qrcode";
 import { ConnectInfo } from "../core/type";
 import { ConnectEndpointKey } from "../core/data";
 
-const fakeConnectInfo: ConnectInfo = {
-  type: ConnectEndpointKey,
-  endpointUrl:
-    "https://upload.wikimedia.org/wikipedia/commons/5/5d/Clojure_logo.svg",
-  logoUrl:
-    "https://upload.wikimedia.org/wikipedia/commons/5/5d/Clojure_logo.svg",
-  chanelName: "Shipping list 24/5/24",
-};
-
 const errors: any = [];
 
 const HomePage: React.FunctionComponent = () => {
-  const [connected, setConnected] = useState(false);
-  const [host, setHost] = useState(fakeConnectInfo);
-  const [item, setItem] = useState(null);
+  const [host, setHost] = useRecoilState(hostState);
+  const [item, setItem] = useRecoilState(itemState);
 
   const navigate = useNavigate();
 
@@ -48,7 +38,7 @@ const HomePage: React.FunctionComponent = () => {
         const item = JSON.parse(decodedText);
         console.log("did process", item);
         if (item.type === ConnectEndpointKey) {
-          setConnected(true);
+          item.connected = true;
           setHost(item);
           return;
         }
@@ -113,19 +103,20 @@ const HomePage: React.FunctionComponent = () => {
 
   return (
     <Page className="page flex flex-col bg-slate-50">
-      <div className="flex justify-end">
+      <div className="flex justify-start">
         <img className="w-10" src={info} alt="logo" onClick={openInfoPage} />
       </div>
       <div className="flex-2">
-        <div id="reader" className="w-full mt-20"></div>
-        {connected ? (
+        <div id="reader" className="w-full"></div>
+        {/* <div className="w-full h-72 bg-black"></div> */}
+        {host.connected ? (
           <div className="flex pt-2 w-full justify-center">
-            <img className="w-10" src={host.logoUrl} alt="logo" />
+            <img className="w-10" src={host.logo} alt="logo" />
             <span
               id="noti"
               className="text-center align-text-bottom text-sky-700 font-bold justify-self-center self-center pl-2"
             >
-              {host.chanelName}
+              {host.chanel}
             </span>
           </div>
         ) : (
@@ -139,7 +130,7 @@ const HomePage: React.FunctionComponent = () => {
           </div>
         )}
       </div>
-      <div className="w-full flex flex-col mb-8">{item}</div>
+      {/* <div className="w-full flex flex-col mb-8">{item}</div> */}
     </Page>
   );
 };
