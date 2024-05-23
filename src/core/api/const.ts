@@ -1,0 +1,1 @@
+export const HOST_INFO = 'host-info';

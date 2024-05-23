@@ -1,2 +1,2 @@
 
-export const ConnectEndpointKey = 'connectendpoint';
+export const ConnectEndpointKey = "connectendpoint";
