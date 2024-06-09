@@ -1,10 +1,8 @@
 import {ConnectEndpointKey} from './data';
 
-export type ConnectInfo = {
+export type HostInfo = {
   connected: boolean,
-  type: typeof ConnectEndpointKey,
-  url: string,
-  logo: string,
-  chanel: string,
+  host: string,
+  channel: string,
 };
 

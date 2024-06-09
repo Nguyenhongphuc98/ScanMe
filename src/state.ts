@@ -19,25 +19,29 @@ export const hostState = atom({
   key: "host",
   default: {
     connected: false,
-    type: ConnectEndpointKey,
-    url: "this is url",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Clojure_logo.svg",
-    chanel: "Shipping list 24/5/24",
   },
+  // default: {
+  //   connected: true,
+  //   host: "this is url",
+  //   channel: "Cty TNHH LongView VNdsa dasfsd fdsfasdfadsf",
+  // },
 });
 
 export const itemState = atom({
   key: "item",
-  default: null,
+  default: "",
   // default: {
-  //   id: "identity",
-  //   name: "item name",
-  //   date: "22/11/1998",
+  //   QRNum: "14567",
+  //   Invoice: "100.000.000 VNĐ",
+  //   ItemNum: "xias124",
+  //   BoxNum: "65",
+  //   Amount: "34356",
+  //   Remark: "asdf32f2133 asd asd adsa d dasd432",
   // },
 });
 
 export const notiState = atom({
   key: "noti",
-  // default: "This is notification This is notification This is notification This is notification",
-  default: "",
+  default: "Move your camera to QR to scan!",
+  // default: "",
 });

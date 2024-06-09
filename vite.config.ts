@@ -7,5 +7,8 @@ export default () => {
     root: "./src",
     base: "",
     plugins: [reactRefresh()],
+    server: {
+      port: 3076,
+    },
   });
 };

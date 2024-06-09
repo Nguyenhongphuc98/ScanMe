@@ -2,18 +2,17 @@ import { Html5Qrcode } from "html5-qrcode";
 
 export function startScanQR(onSuccess: (data: any) => void) {
   const errors: any = [];
-  let ScanedItems = [];
-  setInterval(() => {
-    ScanedItems = [];
-  }, 1500); // TODO: dynamic config
+  
+  let lastItem: any = null;
 
   function onScanSuccess(decodedText, decodedResult) {
-    if (ScanedItems.some((it) => it == decodedText)) {
+    if (lastItem == decodedText) {
       console.log("duplicate: ", decodedText);
       return;
     }
 
     console.log("will process", decodedText);
+    lastItem = decodedText;
 
     try {
       const item = JSON.parse(decodedText);
@@ -38,7 +37,7 @@ export function startScanQR(onSuccess: (data: any) => void) {
       { facingMode: "environment" },
       {
         fps: 10,
-        qrbox: { width: 250, height: 250 },
+        qrbox: (x,y) => {return {width: x, height: y}},
       },
       onScanSuccess,
       onScanFailure
