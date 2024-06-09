@@ -51,20 +51,20 @@ const HomePage: React.FunctionComponent = () => {
       className="page flex flex-col items-center bg-white"
       style={{ paddingBottom: 20 }}
     >
-      <Header/>
+      <Header />
 
       <div className="flex-none w-full justify-center items-center z-0">
         <div id="reader" className="h-72 bg-gray-200"></div>
         {/* <div className="w-full h-72 bg-black"></div> */}
       </div>
 
-      
-
-      <div className="bg-white flex flex-col flex-1 w-full items-center justify-between pt-2 z-50">
-        <Noti />
-        <ScannedData/>
+      <div className="bg-white flex flex-col w-full h-full items-center justify-between pt-2 z-50">
+        <div className="flex w-full justify-center">
+          <Noti />
+          <ScannedData />
+        </div>
         {!noti && !item && <div></div>}
-        <CopyAction/>
+        <CopyAction />
       </div>
     </Page>
   );

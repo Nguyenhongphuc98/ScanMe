@@ -7,9 +7,9 @@ const ScanedData: React.FunctionComponent = () => {
 
   const stringView = () => {
     return (
-      <div className="flex justify-center bg-white p-6 h-full w-full rounded">
+      <div className="flex justify-center bg-white p-2 h-full w-11/12 rounded">
         <div
-          className="rounded h-fit px-6 py-2 w-11/12"
+          className="rounded h-fit px-6 py-2 w-full"
           style={{ backgroundColor: "#F7F7F7", color: "#2E2E2E" }}
         >
           <div className="mb-2 text-sky-600 font-semibold">Text</div>
@@ -21,11 +21,11 @@ const ScanedData: React.FunctionComponent = () => {
 
   const objectView = () => {
     return (
-      <div className="bg-white flex flex-col w-full px-6 pt-6 overflow-y-auto h-3/6">
+      <div className="bg-white flex flex-col w-full h-full px-6 pt-2 overflow-y-auto" style={{height: 158}}>
         {item &&
           Object.keys(item).map((k) => {
             return (
-              <div className="flex w-full mt-1 ">
+              <div className="flex w-full mt-1" key={k}>
                 <div
                   className="flex w-2/6 bg-emerald-400 rounded-l-md text-start pl-2 text-white font-semibold items-center truncate"
                   style={{ height: 36 }}

@@ -19,7 +19,7 @@ const Header: React.FunctionComponent = () => {
     </div>
   ) : (
     <div
-      className="flex flex-2 justify-center items-center mb-2 h-8 rounded w-full"
+      className="flex flex-none justify-center items-center mb-2 h-8 rounded w-full"
       style={{ backgroundColor: "#FFF9D0", color: "FF6A6A" }}
     >
       <span className="text-red-500">Chưa kết nối máy chủ</span>
