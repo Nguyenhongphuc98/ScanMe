@@ -5,8 +5,9 @@ import CopyAction from "../components/copy-action";
 import Header from "../components/header";
 import Noti from "../components/noti-msg";
 import ScannedData from "../components/scanned-data";
+import Toast from "../components/toast";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import {
   hostState,
   itemState as itemState,
@@ -19,6 +20,8 @@ import questionIcon from "/icons/question.svg";
 import { HostInfo } from "../core/type";
 import { ConnectEndpointKey } from "../core/data";
 import { startScanQR } from "../core/qr/handler";
+import { MetaData } from "../core/api/meta-data";
+import { GUI_SCAN } from "../core/lang";
 
 const HomePage: React.FunctionComponent = () => {
   const [host, setHost] = useRecoilState<HostInfo>(hostState);
@@ -33,10 +36,18 @@ const HomePage: React.FunctionComponent = () => {
 
       if (data.type === ConnectEndpointKey) {
         data.connected = true;
+
+        MetaData.instance().setEndpoint(data.host);
+
         setHost(data);
         setItem("");
+        setNoti(GUI_SCAN);
       } else {
-        setItem(data);
+        MetaData.instance()
+          .getFullData(data)
+          .then((v) => {
+            setItem(v);
+          });
       }
     });
   }, []);
@@ -58,14 +69,15 @@ const HomePage: React.FunctionComponent = () => {
         {/* <div className="w-full h-72 bg-black"></div> */}
       </div>
 
-      <div className="bg-white flex flex-col w-full h-full items-center justify-between pt-2 z-50">
-        <div className="flex w-full justify-center">
+      <div className="bg-white flex flex-col w-full h-full items-center justify-between pt-2 z-40">
+        <div className="flex flex-col w-full items-center">
           <Noti />
           <ScannedData />
         </div>
         {!noti && !item && <div></div>}
         <CopyAction />
       </div>
+      <Toast />
     </Page>
   );
 };

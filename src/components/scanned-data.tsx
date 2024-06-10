@@ -1,9 +1,9 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { itemState } from "../state";
 
 const ScanedData: React.FunctionComponent = () => {
-  const [item] = useRecoilState<any>(itemState);
+  const item = useRecoilValue<any>(itemState);
 
   const stringView = () => {
     return (
@@ -21,7 +21,7 @@ const ScanedData: React.FunctionComponent = () => {
 
   const objectView = () => {
     return (
-      <div className="bg-white flex flex-col w-full h-full px-6 pt-2 overflow-y-auto" style={{height: 158}}>
+      <div className="bg-white flex flex-col w-full h-full px-6 pt-2 mt-6 overflow-y-auto" style={{height: 168}}>
         {item &&
           Object.keys(item).map((k) => {
             return (

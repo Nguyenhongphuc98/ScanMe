@@ -1,11 +1,12 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import { HOST_NOT_CONNECT } from "../core/lang";
 import { HostInfo } from "../core/type";
 import { hostState } from "../state";
 
 const Header: React.FunctionComponent = () => {
 
-  const [host] = useRecoilState<HostInfo>(hostState);
+  const host = useRecoilValue<HostInfo>(hostState);
 
   if (typeof host == 'string') return null;
 
@@ -22,7 +23,7 @@ const Header: React.FunctionComponent = () => {
       className="flex flex-none justify-center items-center mb-2 h-8 rounded w-full"
       style={{ backgroundColor: "#FFF9D0", color: "FF6A6A" }}
     >
-      <span className="text-red-500">Chưa kết nối máy chủ</span>
+      <span className="text-red-500">{HOST_NOT_CONNECT}</span>
       <img src="icons/question2.svg" className="px-1 w-6" />
     </div>
   );

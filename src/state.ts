@@ -1,6 +1,7 @@
 import { atom, selector } from "recoil";
 import { getUserInfo } from "zmp-sdk";
 import { ConnectEndpointKey } from "./core/data";
+import { GUI_SCAN } from "./core/lang";
 
 export const userState = selector({
   key: "user",
@@ -30,6 +31,7 @@ export const hostState = atom({
 export const itemState = atom({
   key: "item",
   default: "",
+  // default: "d asda sdasdsa",
   // default: {
   //   QRNum: "14567",
   //   Invoice: "100.000.000 VNĐ",
@@ -42,6 +44,11 @@ export const itemState = atom({
 
 export const notiState = atom({
   key: "noti",
-  default: "Move your camera to QR to scan!",
+  default: GUI_SCAN,
   // default: "",
+});
+
+export const toastState = atom({
+  key: "toast",
+  default: "",
 });
