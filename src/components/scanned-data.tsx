@@ -9,8 +9,7 @@ const ScanedData: React.FunctionComponent = () => {
     return (
       <div className="flex justify-center bg-white p-2 h-full w-11/12 rounded">
         <div
-          className="rounded h-fit px-6 py-2 w-full"
-          style={{ backgroundColor: "#F7F7F7", color: "#2E2E2E" }}
+          className="rounded h-fit px-6 py-2 w-full bg-[#F7F7F7] text-[#2E2E2E]"
         >
           <div className="mb-2 text-sky-600 font-semibold">Text</div>
           <div className="truncate">{item}</div>
@@ -27,14 +26,12 @@ const ScanedData: React.FunctionComponent = () => {
             return (
               <div className="flex w-full mt-1" key={k}>
                 <div
-                  className="flex w-2/6 bg-emerald-400 rounded-l-md text-start pl-2 text-white font-semibold items-center truncate"
-                  style={{ height: 36 }}
+                  className="flex w-2/6 h-[2.5rem] bg-emerald-400 rounded-l-md text-start pl-2 text-white font-semibold items-center truncate"
                 >
                   <span className="truncate">{k}</span>
                 </div>
                 <div
-                  className="flex w-4/6 bg-indigo-200 rounded-r-md  pl-2 font-semibold items-center"
-                  style={{ height: 34, color: "#001A33" }}
+                  className="flex w-4/6 bg-indigo-200 rounded-r-md  pl-2 font-semibold items-center text-[#001A33] h-[2.4rem]"
                 >
                   <span className="truncate">{item[k]}</span>
                 </div>

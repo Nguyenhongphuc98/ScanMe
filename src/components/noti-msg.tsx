@@ -10,8 +10,7 @@ const Noti: React.FunctionComponent = () => {
   return (
     <div className="flex justify-center px-6 pt-2 w-full rounded">
       <span
-        className="rounded h-fit px-6 py-2"
-        style={{ backgroundColor: "#FFF9D0", color: "#FF6A6A" }}
+        className="rounded h-fit px-6 py-2 bg-[#FFF9D0] text-[#FF6A6A]"
       >
         {noti}
       </span>

@@ -28,7 +28,6 @@ const HomePage: React.FunctionComponent = () => {
   const [item, setItem] = useRecoilState<any>(itemState);
   const [noti, setNoti] = useRecoilState(notiState);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     startScanQR((data) => {
@@ -51,10 +50,6 @@ const HomePage: React.FunctionComponent = () => {
       }
     });
   }, []);
-
-  const openInfoPage = () => {
-    navigate("/info");
-  };
 
   console.log("itemm", item);
   return (
