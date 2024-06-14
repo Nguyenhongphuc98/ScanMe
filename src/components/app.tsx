@@ -8,6 +8,7 @@ import Form from "../pages/form";
 import User from "../pages/user";
 import Info from "../pages/info";
 import Guide from "../pages/guide";
+import ManualHost from "../pages/manual-host";
 
 const MyApp = () => {
   return (
@@ -22,6 +23,7 @@ const MyApp = () => {
               <Route path="/form" element={<Form></Form>}></Route>
               <Route path="/user" element={<User></User>}></Route>
               <Route path="/info" element={<Info></Info>}></Route>
+              <Route path="/addhost" element={<ManualHost></ManualHost>}></Route>
             </AnimationRoutes>
           </ZMPRouter>
         </SnackbarProvider>

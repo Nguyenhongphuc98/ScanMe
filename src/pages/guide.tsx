@@ -2,6 +2,7 @@ import React from "react";
 // import { Pre, Line, LineNo, LineContent } from "./styles";
 import { Highlight } from "prism-react-renderer";
 import { Line, LineContent, LineNo, Pre } from "../components/code-style";
+import { useNavigate } from "react-router-dom";
 
 const connectObject = `
 {
@@ -22,6 +23,12 @@ const respObject = `
 `.trim();
 
 const Guide: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+  
+  const openAddhostPage = () => {
+    navigate("/addhost");
+  };
+
   const renderHighlight = (object) => {
     return (
       <Highlight code={object} language="jsx">
@@ -69,7 +76,7 @@ const Guide: React.FunctionComponent = () => {
         <p className="text-xs pb-4">
           Mỗi lần quét được thông tin, Scanme sẽ gửi
           <span className="text-orange-700">POST</span> request lên
-          <span className="text-orange-700">submit</span> kèm theo thông tin vừa
+          <span className="text-orange-700"> submit</span> kèm theo thông tin vừa
           quét được
           <span className="text-orange-700">{`{data: scannedData, sender: ZaloName}`}</span>
           . Nếu response trả về object chứa thông tin đầy đủ
@@ -79,7 +86,7 @@ const Guide: React.FunctionComponent = () => {
         </p>
 
         <div className="flex justify-center items-end">
-          <div className="flex rounded-md bg-[#E5EFFF] text-[#5198FF] font-semibold w-fit h-10 px-2 items-center">
+          <div className="flex rounded-md bg-[#E5EFFF] active:bg-blue-200 text-[#5198FF] font-semibold w-3/4 h-10 px-2 justify-center items-center" onClick={openAddhostPage}>
             Tạo kết nối thủ công
           </div>
         </div>
