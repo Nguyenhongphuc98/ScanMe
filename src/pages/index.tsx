@@ -65,7 +65,7 @@ const HomePage: React.FunctionComponent = () => {
       </div>
 
       <div className="bg-white flex flex-col w-full h-full items-center justify-between pt-2 z-40">
-        <div className="flex flex-col w-full items-center">
+        <div className="flex flex-col w-full">
           <Noti />
           <ScannedData />
         </div>
