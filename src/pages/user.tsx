@@ -40,9 +40,7 @@ const UserPage = () => {
           </Box>
           <Box ml={4}>
             <Button
-              onClick={() => {
-                navigate("/form");
-              }}
+              onClick={() =>{}}
               size="small"
               icon={<Icon icon="zi-edit" />}
             />

@@ -3,10 +3,7 @@ import { Route } from "react-router-dom";
 import { App, ZMPRouter, AnimationRoutes, SnackbarProvider } from "zmp-ui";
 import { RecoilRoot } from "recoil";
 import HomePage from "../pages";
-import About from "../pages/about";
-import Form from "../pages/form";
 import User from "../pages/user";
-import Info from "../pages/info";
 import Guide from "../pages/guide";
 import ManualHost from "../pages/manual-host";
 
@@ -19,10 +16,7 @@ const MyApp = () => {
             <AnimationRoutes>
               <Route path="/" element={<HomePage></HomePage>}></Route>
               <Route path="/guide" element={<Guide></Guide>}></Route>
-              <Route path="/about" element={<About></About>}></Route>
-              <Route path="/form" element={<Form></Form>}></Route>
-              <Route path="/user" element={<User></User>}></Route>
-              <Route path="/info" element={<Info></Info>}></Route>
+              {/* <Route path="/user" element={<User></User>}></Route> */}
               <Route path="/addhost" element={<ManualHost></ManualHost>}></Route>
             </AnimationRoutes>
           </ZMPRouter>

@@ -9,7 +9,6 @@ import { HostInfo } from "../core/type";
 import { isValidUrl } from "../core/utils";
 import { hostState } from "../state";
 
-
 import Toaster from "../core/toaster";
 import { useNavigate } from "react-router";
 
@@ -18,34 +17,28 @@ const ManualHost: React.FunctionComponent = () => {
 
   const [host, setHost] = useRecoilState<HostInfo>(hostState);
   const [saveable, setSaveable] = useState<boolean>(false);
+
   const [hostValue, setHostValue] = useState<string>("");
+  const [keyValue, setKeyValue] = useState<string>("");
+
   const [validUrl, setValidUrl] = useState<string>("success");
 
   const updateHost = () => {
-    
-
-    const hostElement = document.getElementById("host");
-    const keyElement = document.getElementById("host");
-
-    const endpoint = hostElement?.textContent || "";
-    const key = keyElement?.textContent || "";
-
     const saveHost = (host: HostInfo) => {
-
       MetaData.instance().setEndpoint(host.host);
       setHost(host);
 
       Toaster.show("Lưu thành công.", 1300);
       navigate("/");
-    }
+    };
 
-    if (key) {
+    if (keyValue) {
       // authen and get enpoint
     } else {
       const host: HostInfo = {
         connected: true,
-        host: endpoint,
-        channel: endpoint,
+        host: hostValue,
+        channel: keyValue || hostValue,
       };
       saveHost(host);
     }
@@ -62,11 +55,15 @@ const ManualHost: React.FunctionComponent = () => {
         setSaveable(false);
         setValidUrl("error");
       }
-      
     } else {
       setSaveable(false);
       setValidUrl("success");
     }
+  };
+
+  const updateKeyInput = (e) => {
+    const keyData = e.target.value;
+    setKeyValue(keyData);
   };
 
   return (
@@ -92,10 +89,10 @@ const ManualHost: React.FunctionComponent = () => {
           label="Key (optional)"
           type="text"
           placeholder="secrect-key"
-          value=""
-          errorText="Bạn phải nhập đúng"
+          value={keyValue}
           clearable
           status="success"
+          onChange={updateKeyInput}
         />
 
         <h3 className="font-semibold text-sm text-[#001A33] mt-6">
@@ -104,8 +101,8 @@ const ManualHost: React.FunctionComponent = () => {
         <p className="text-xs pb-4">
           Mỗi lần quét được thông tin, Scanme sẽ gửi
           <span className="text-orange-700">POST</span> request lên
-          <span className="text-orange-700"> submit</span> kèm theo thông tin vừa
-          quét được
+          <span className="text-orange-700"> submit</span> kèm theo thông tin
+          vừa quét được
           <span className="text-orange-700">{`{data: scannedData, sender: ZaloName}`}</span>
           . Nếu response trả về object chứa thông tin đầy đủ
           <span className="text-orange-700">{`{error_code: 0, data: SVdata}`}</span>
@@ -114,21 +111,22 @@ const ManualHost: React.FunctionComponent = () => {
         </p>
 
         <div className="flex justify-center h-1/2 items-end">
-          {saveable ?<div
-            className="flex rounded-md bg-[#0068FF] active:bg-[#0354CA] text-white font-semibold w-fit h-10 px-2 items-center w-3/4 justify-center"
-            onClick={updateHost}
-          >
-            Lưu thông tin
-          </div> :
-          <div
-            className="flex rounded-md bg-neutral-100 text-neutral-500 font-semibold w-fit h-10 px-2 items-center w-3/4 justify-center"
-          >
-            Lưu thông tin
-          </div>}
+          {saveable ? (
+            <div
+              className="flex rounded-md bg-[#0068FF] active:bg-[#0354CA] text-white font-semibold h-10 px-2 items-center w-3/4 justify-center"
+              onClick={updateHost}
+            >
+              Lưu thông tin
+            </div>
+          ) : (
+            <div className="flex rounded-md bg-neutral-100 text-neutral-500 font-semibold h-10 px-2 items-center w-3/4 justify-center">
+              Lưu thông tin
+            </div>
+          )}
         </div>
       </div>
 
-      <Toast/>
+      <Toast />
     </div>
   );
 };

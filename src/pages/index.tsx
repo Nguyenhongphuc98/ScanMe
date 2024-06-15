@@ -30,6 +30,8 @@ const HomePage: React.FunctionComponent = () => {
 
 
   useEffect(() => {
+    MetaData.instance().init();
+
     startScanQR((data) => {
       setNoti("");
 

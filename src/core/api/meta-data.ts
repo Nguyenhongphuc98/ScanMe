@@ -1,3 +1,5 @@
+import { getUserInfo } from "zmp-sdk";
+
 type JSONResponse = {
   error_code: number;
   data: any;
@@ -5,6 +7,7 @@ type JSONResponse = {
 
 export class MetaData {
   endpoint: string = "";
+  zaloName: string = "";
   lastData: any;
 
   static _instance: MetaData;
@@ -16,6 +19,14 @@ export class MetaData {
       this._instance = new this();
     }
     return this._instance;
+  }
+
+  init() {
+    getUserInfo({
+      avatarType: "normal",
+    }).then(data => {
+      this.zaloName = data.userInfo.name;
+    });
   }
 
   setEndpoint(url: string) {
@@ -36,7 +47,7 @@ export class MetaData {
   
       const submitData = new FormData();
       submitData.set("data", data);
-      submitData.set("sender", "ZaloName");
+      submitData.set("sender", this.zaloName);
   
       return fetch(this.endpoint, {
         method: "POST",
