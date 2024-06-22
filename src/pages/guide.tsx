@@ -1,54 +1,15 @@
 import React from "react";
-// import { Pre, Line, LineNo, LineContent } from "./styles";
-import { Highlight } from "prism-react-renderer";
-import { Line, LineContent, LineNo, Pre } from "../components/code-style";
 import { useNavigate } from "react-router-dom";
-
-const connectObject = `
-{
-  type: 'connect',
-  host: 'host-url.domain',
-  key: 'secrect-key',
-}
-`.trim();
-
-const respObject = `
-{
-  error_code: 0,
-  data: {
-    submit: 'submit-url',
-    channel: 'channel-name',
-  }
-}
-`.trim();
+import CodeHighlight from "../components/code-highlight";
+import { connectObject, reqObject, respObject } from "../core/const";
 
 const Guide: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  
+
   const openAddhostPage = () => {
     navigate("/addhost");
   };
-
-  const renderHighlight = (object) => {
-    return (
-      <Highlight code={object} language="jsx">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Pre className={className} style={style}>
-            {tokens.map((line, i) => (
-              <Line key={i} {...getLineProps({ line, key: i })}>
-                <LineNo>{i + 1}</LineNo>
-                <LineContent>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </LineContent>
-              </Line>
-            ))}
-          </Pre>
-        )}
-      </Highlight>
-    );
-  };
+  
 
   return (
     <div className="bg-white h-screen">
@@ -57,36 +18,53 @@ const Guide: React.FunctionComponent = () => {
       </h1>
       <div className="mx-6">
         <h3 className="font-semibold text-sm text-[#001A33]">
-          Bước 1: Tạo mã QR chứa object như bên dưới:
+          Bước 1: Tạo mã QR chứa dạng stringify của object như bên dưới:
         </h3>
-        {renderHighlight(connectObject)}
+        <CodeHighlight code = {connectObject}/>
         <p className="text-xs pb-4">
-          Scanme sẽ gửi <span className="text-orange-700">POST</span> request
-          lên <span className="text-orange-700">host</span> kèm theo field
-          <span className="text-orange-700">key</span> trong body. Bạn có thể bỏ
-          qua field này nếu không cần authen.
+          Scanme sẽ lưu thông tin này để sử dụng trong suốt phiên mở app. Bạn có
+          thể bỏ qua field <span className="text-orange-700">key</span> nếu
+          không cần authen.
         </p>
         <h3 className="font-semibold text-sm text-[#001A33]">
-          Bước 2: Tạo response cho host vừa cung cấp
+          Bước 2: Tạo handler cho host vừa cung cấp
         </h3>
-        {renderHighlight(respObject)}
+
+        <p className="text-xs">
+          <h4>Input</h4>
+          <ul className="ml-6 mb-2" style={{ listStyleType: "disc" }}>
+            <li>ApiType: POST</li>
+            <li>Body (raw):</li>
+          </ul>
+          <CodeHighlight code = {reqObject}/>
+          <h4>Output</h4>
+          Trả kết quả dưới dạng JSON như bên dưới:
+        </p>
+        <CodeHighlight code = {respObject}/>
         <h3 className="font-semibold text-sm text-[#001A33]">
           Bước 3: Quét thông tin QR
         </h3>
         <p className="text-xs pb-4">
-          Mỗi lần quét được thông tin, Scanme sẽ gửi
-          <span className="text-orange-700">POST</span> request lên
-          <span className="text-orange-700"> submit</span> kèm theo thông tin vừa
-          quét được
-          <span className="text-orange-700">{`{data: scannedData, sender: ZaloName}`}</span>
-          . Nếu response trả về object chứa thông tin đầy đủ
-          <span className="text-orange-700">{`{error_code: 0, data: SVdata}`}</span>
-          , app sẽ hiển thị <span className="text-orange-700">data</span> trong
-          đó, nếu không sẽ chỉ hiển thị thông tin vừa quét được.
+          Mỗi lần quét được thông tin, Scanme sẽ gửi request lên
+          <span className="text-orange-700"> host</span> kèm theo thông tin vừa
+          quét được. Tùy vào phản hồi từ host:
+          <ul className="ml-6 mb-2" style={{ listStyleType: "disc" }}>
+            <li>
+              error_code: 0, hiển thị{" "}
+              <span className="text-orange-700">data</span> trong resp
+            </li>
+            <li>
+              error_code: khác 0, hiển thị{" "}
+              <span className="text-orange-700">scanned-data</span>
+            </li>
+          </ul>
         </p>
 
         <div className="flex justify-center items-end">
-          <div className="flex rounded-md bg-[#E5EFFF] active:bg-blue-200 text-[#5198FF] font-semibold w-3/4 h-10 px-2 justify-center items-center" onClick={openAddhostPage}>
+          <div
+            className="flex rounded-md bg-[#E5EFFF] active:bg-blue-200 text-[#5198FF] font-semibold w-3/4 h-10 px-2 mb-6 justify-center items-center"
+            onClick={openAddhostPage}
+          >
             Tạo kết nối thủ công
           </div>
         </div>

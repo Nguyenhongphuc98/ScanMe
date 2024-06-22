@@ -38,7 +38,7 @@ const HomePage: React.FunctionComponent = () => {
       if (data.type === ConnectEndpointKey) {
         data.connected = true;
 
-        MetaData.instance().setEndpoint(data.host);
+        MetaData.instance().setEndpoint(data.host, data.key);
 
         setHost(data);
         setItem("");

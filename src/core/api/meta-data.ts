@@ -7,6 +7,8 @@ type JSONResponse = {
 
 export class MetaData {
   endpoint: string = "";
+  key: string = "";
+
   zaloName: string = "";
   lastData: any;
 
@@ -24,17 +26,18 @@ export class MetaData {
   init() {
     getUserInfo({
       avatarType: "normal",
-    }).then(data => {
+    }).then((data) => {
       this.zaloName = data.userInfo.name;
     });
   }
 
-  setEndpoint(url: string) {
+  setEndpoint(url: string, key: string = "") {
     this.endpoint = url;
+    this.key = key;
   }
 
   getFullData(data: any) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const onDone = (meta) => {
         this.lastData = meta;
         resolve(meta);
@@ -44,14 +47,21 @@ export class MetaData {
         console.log("endpoint not set, use default");
         return onDone(data);
       }
-  
-      const submitData = new FormData();
-      submitData.set("data", data);
-      submitData.set("sender", this.zaloName);
-  
+
+      // const submitData = new FormData();
+      // submitData.set("key", this.key);
+      // submitData.set("data", data);
+      // submitData.set("sender", this.zaloName);
+      
+
       return fetch(this.endpoint, {
         method: "POST",
-        body: submitData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          key: this.key, 
+          data: data,
+          sender: this.zaloName,
+        })
       })
         .then(async (res) => {
           const jsonRes: JSONResponse = await res.json();
