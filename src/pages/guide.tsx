@@ -12,7 +12,7 @@ const Guide: React.FunctionComponent = () => {
   
 
   return (
-    <div className="bg-white h-screen">
+    <div className="bg-white">
       <h1 className="text-[#001A33] text-xl font-semibold p-4 ">
         Quét mã để kết nối
       </h1>

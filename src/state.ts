@@ -1,6 +1,5 @@
 import { atom, selector } from "recoil";
 import { getUserInfo } from "zmp-sdk";
-import { ConnectEndpointKey } from "./core/data";
 import { GUI_SCAN } from "./core/lang";
 
 export const userState = selector({

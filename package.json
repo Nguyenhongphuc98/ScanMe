@@ -2,7 +2,7 @@
   "name": "scanme",
   "private": true,
   "version": "1.0.0",
-  "description": "ScanMe",
+  "description": "App use to scan QR code and submit info to Server",
   "repository": "",
   "license": "UNLICENSED",
   "browserslist": [

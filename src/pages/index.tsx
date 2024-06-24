@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { List, Page, Icon, useNavigate, Button } from "zmp-ui";
+import { vibrate } from "zmp-sdk/apis";
 
 import CopyAction from "../components/copy-action";
 import Header from "../components/header";
@@ -33,6 +34,13 @@ const HomePage: React.FunctionComponent = () => {
     MetaData.instance().init();
 
     startScanQR((data) => {
+      vibrate({
+        type: "oneShot",
+        milliseconds: 50,
+        success: () => { },
+        fail: (error) => { }
+      });
+
       setNoti("");
 
       if (data.type === ConnectEndpointKey) {

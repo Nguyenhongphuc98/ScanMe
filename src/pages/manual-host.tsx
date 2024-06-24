@@ -34,16 +34,12 @@ const ManualHost: React.FunctionComponent = () => {
       navigate("/");
     };
 
-    if (keyValue) {
-      // authen and get enpoint
-    } else {
-      const host: HostInfo = {
-        connected: true,
-        host: hostValue,
-        channel: keyValue || hostValue,
-      };
-      saveHost(host);
-    }
+    const host: HostInfo = {
+      connected: true,
+      host: hostValue,
+      channel: keyValue || hostValue,
+    };
+    saveHost(host);
   };
 
   const updateHostInput = (e) => {
@@ -69,7 +65,7 @@ const ManualHost: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="bg-white h-screen pb-6">
+    <div className="bg-white pb-6">
       <h1 className="text-[#001A33] text-xl font-semibold p-4 ">
         Nhập host để kết nối
       </h1>
@@ -96,21 +92,6 @@ const ManualHost: React.FunctionComponent = () => {
           status="success"
           onChange={updateKeyInput}
         />
-
-        <div className="flex justify-center my-6">
-          {saveable ? (
-            <div
-              className="flex rounded-md bg-[#0068FF] active:bg-[#0354CA] text-white font-semibold h-10 px-2 items-center w-3/4 justify-center"
-              onClick={updateHost}
-            >
-              Lưu thông tin
-            </div>
-          ) : (
-            <div className="flex rounded-md bg-neutral-100 text-neutral-500 font-semibold h-10 px-2 items-center w-3/4 justify-center">
-              Lưu thông tin
-            </div>
-          )}
-        </div>
 
         <h3 className="font-semibold text-sm text-[#001A33]">
           Bước 2: Tạo handler cho host vừa cung cấp
@@ -145,6 +126,21 @@ const ManualHost: React.FunctionComponent = () => {
             </li>
           </ul>
         </p>
+
+        <div className="flex justify-center my-6">
+        {saveable ? (
+          <div
+            className="flex rounded-md bg-[#0068FF] active:bg-[#0354CA] text-white font-semibold h-10 px-2 items-center w-3/4 justify-center"
+            onClick={updateHost}
+          >
+            Lưu thông tin
+          </div>
+        ) : (
+          <div className="flex rounded-md bg-neutral-100 text-neutral-500 font-semibold h-10 px-2 items-center w-3/4 justify-center">
+            Lưu thông tin
+          </div>
+        )}
+      </div>
       </div>
 
       <Toast />
